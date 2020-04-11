@@ -99,18 +99,17 @@
 					<div class="6u">
 						<section>
 							<h2>VQG model</h2>
-							<a class="image fit"><img src="images/VQG_figure (1).png" alt="" /></a>
+							<a class="image fit"><img src="images/VQG_figure.png" alt="" /></a>
 							<p> 
-								The algorithm behind VQG consists in an Encoder-Decoder architecture with attention, 
-								as shown in Figure \ref{fig:vqg_model}. The model is trained to maximize the likelihood 
-								of producing a target sequence of words optimizing the cross-entropy loss \cite{bishop2006pattern}. 
+								The algorithm behind VQG consists in an Encoder-Decoder architecture with attention.
+								The model is trained to maximize the likelihood 
+								of producing a target sequence of words optimizing the cross-entropy loss. 
 								The Encoder takes as input one of the given photos from the user and learns its information using a 
 								Convolutional Neural Network (CNN). The CNN provides the image's learned features to the Decoder which
 								generates the question word by word by using an attention mechanism with a Long Short-Term Memory (LSTM).
 								Since there are already CNNs trained on large datasets with an outstanding performance, 
-								we integrate a \textit{ResNet-101} \cite{he2016deep} trained on ImageNet. 
+								we integrate a ResNet-101 trained on ImageNet. 
 
- Regarding hyperparameters, the VQG encoder is composed of 2048 neuron cells, while the VQG decoder has an attention layer of 512 followed by an embedding layer of 512 and a LSTM with the same size. We set the batch size to 32. We use a dropout of 50\% and a beam search of 7 for decoding, which let as obtain up to 5 output questions. The vocabulary we use consists of all words seen 3 or more times in the training set, which amounts to 11.214 unique tokens. Unknown words are mapped to an $<$\texttt{unk}$>$ token during training, but we do not allow the decoder to produce this token at test time. We also set a maximum sequence length of 6 words as we want simple questions easy to understand and easy to learn by the model.
 							</p>
 						</section>
 					</div>
@@ -118,7 +117,17 @@
 						<section>
 							<h2>Chatbot model</h2>
 							<a class="image fit"><img src="images/seq-to-seq.png" alt="" /></a>
-							<p> 
+							<p> The core of our chatbot model is a sequence-to-sequence. The encoder iterates through the input sentence
+								one word at each time step producing an output vector and a hidden state vector. The hidden state 
+								vector is passed to the next time step, while the output vector is stored. We use a bidirectional 
+								Gated Recurrent Unit (GRU), one GRU fed in sequential order and another one fed in reverse order. 
+								The outputs of both networks are summed at each time step, so we encode past and future context. 
+
+								By using an attention mechanism, the decoder uses the encoder’s context vectors, and internal hidden
+								states to generate the next word in the sequence. 
+								It continues generating words until it outputs an token. We use an attention layer to multiply 
+								attention weights to encoder's outputs to focus on the relevant information when decoding the sequence.
+								This approach have shown better performance on sequence-to-sequence models
 							</p>
 						</section>
 					</div>
