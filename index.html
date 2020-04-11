@@ -45,8 +45,8 @@
 			<div class="container">
 				<div class="row" >
 						<div class="6u">
-							<section>
 							<h2>DEMO</h2>
+							<section>
 							<video width="400" height="800" controls preload>
 							    <source src="demo-Elisabot.mp4" media="only screen and (min-device-width: 568px)"></source> 
 							    <source src="demo-Elisabot.iphone.mp4" media="only screen and (max-device-width: 568px)"></source> 
@@ -56,7 +56,26 @@
 						<div class="6u">
 							<h2>Methodology</h2>
 							<section>
-							<p> We named the model Elisabot and its goal is to maintain a dialog with the patient about user’s 
+							<p> We propose a conversational agent that simulates a reminiscence therapist by asking questions 
+								about the patient's experiences. Questions are generated from pictures provided by the patient, 
+								which contain significant moments or important people in user's life. The proposed methodology is 
+								specific for dementia therapy, compared to a general Image-based Question and Answering (Q\&A) 
+								system, because the generated questions cannot be answered by only looking at the picture as 
+								common Q\&A systems do, the user needs to know the place, the time, the people or animals appearing 
+								in the picture to be able to answer the questions. To engage the user in the conversation we propose 
+								a second model which generates comments on user's answers. A chatbot model trained with a dataset 
+								containing simple conversations between different people. The activity pretends to be challenging 
+								for the patient, as the questions may require the user to exercise the memory, but amusing at the 
+								same time. Our contributions include:
+
+								- Automation of the Reminiscence therapy by using a multi-modal approach that generates questions 
+								from pictures, without using a reminiscence therapy dataset.
+    
+								- An end-to-end deep learning approach which do not require hand-crafted rules and it is ready to 
+								be used by mild cognitive impairment patients. The system is designed to be intuitive and easy to 
+								use for the users and could be reached by any smartphone with internet connection.
+								
+								We named it Elisabot and its goal is to maintain a dialog with the patient about user’s 
 							life experiences. Before starting the conversation, the user must introduce photos containing 
 							significant moments for him/her. The system randomly chooses one of these pictures and analyses 
 							the content. Then, Elisabot shows the selected picture and starts the conversation by asking a 
@@ -144,11 +163,12 @@
 		</section>
 		<!-- Four -->
 		<section id="author" class="wrapper style1">
+			<header class="major">
+				<h3>Author</h3>
+			</header>
 			<div class="container">
+
 				<div class="row">
-					<header class="major">
-					<h3>Author</h3>
-					</header>
 					<section>
 						<div align="center">
 						Mariona Carós
@@ -156,6 +176,7 @@
 					</section>
 				</div>
 			</div>
+			
 		</section>	
 		
 	</body>
