@@ -25,7 +25,7 @@
 			<nav id="nav">
 				<ul>
 					<li><a href="#video">Video</a></li>
-					<li><a href="#introduction">Introduction</a></li>
+					<li><a href="#methodology">Methodology</a></li>
  					<li><a href="#dataset">Dataset</a></li>
 					<li><a href="#architecture">Architecture</a></li>
 				</ul>
@@ -42,35 +42,46 @@
 		<!-- One -->
 		<section id="video" class="wrapper style1">
 			<header class="major">
-					<h2>Video</h2>
+				<h2>Video</h2>
 			</header>
-			<video src="demo-Elisabot.mp4" width="320" height="200" controls preload></video>
+			<div class="container">
+				<div class="row">
+					<div class="18u">
+						<section class="special box">
+							<video src="demo-Elisabot.mp4" width="640" height="400" controls preload></video>
 
-			
+						</section>
+					</div>
+				</div>
+			</div>
 		</section>
 
 		<!-- Three -->
-		<section id="introduction" class="wrapper style1">
+		<section id="methodology" class="wrapper style1">
 			<header class="major">
-				<h2>Introduction</h2>
+				<h2>Methodology</h2>
 			</header>
 			<div class="container">
-<!-- 				<div class="row">
+				<div class="row">
 					<div class="6u">
 						<section>
-							<h2>Our approach</h2>
-							<a class="image fit"><img src="images/our_approach2.png" alt="" /></a>
+							<h2>Interaction with Elisabot</h2>
+							<a class="image fit"><img src="images/diagrama.png" alt="" /></a>
 							<p></p>
 						</section>
 					</div>
 					<div class="6u">	
 						<section>
-							<h3>Dataset</h3>
-							<!-- <a class="image fit"><img src="images/BW_bird.png" alt="" /></a>
-							<p> We used two datasets to train our model; first we trained on a subset (around 500k images) of the well known  <a href="http://www.image-net.org"> ImageNet </a>, due to time and hardware limitations, we ended up switching to a smaller dataset: a flowers image dataset composed of the combination of several datasets from Kaggle and the Oxford University, which contained 14K images. Predicting color has the nice property that training data is largely available. There is no need to label data because any color photo can be used as a training example, simply by taking the luminance as input and its ab channels (color) as the supervisory signal. Therefore, we can say our algorithm uses a self-supervised approach to train by previously converting the source images to grayscale. </p>
+							<p> We named the model Elisabot and its goal is to maintain a dialog with the patient about user’s 
+								life experiences. Before starting the conversation, the user must introduce photos containing 
+								significant moments for him/her. The system randomly chooses one of these pictures and analyses 
+								the content. Then, Elisabot shows the selected picture and starts the conversation by asking a 
+								question about the picture. The user should give an answer, even though he does not know it, 
+								and Elisabot makes a relevant comment on it. The cycle starts again by asking another relevant 
+								question about the image and the flow is repeated for 4 to 6 times until the picture is changed. </p>
 						</section>
 					</div>
-				</div> -->
+				</div>
 			</div>
 		</section>			
 
