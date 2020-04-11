@@ -91,16 +91,30 @@
 				<h2>Architecture</h2>
 			</header>
 			<div class="container">
+				<p> Elisabot is composed of two models: 
+					the model in charge of asking questions about the image which we will refer to it as Visual Question Generator (VQG),
+					and the Chatbot model which tries to make the dialogue more engaging by giving feedback to the user's answers.
+				</p>
 				<div class="row">
 					<div class="6u">
 						<section>
 							<h2>VQG model</h2>
 							<a class="image fit"><img src="images/VQG_figure.png" alt="" /></a>
 							<p> 
+								The algorithm behind VQG consists in an Encoder-Decoder architecture with attention, 
+								as shown in Figure \ref{fig:vqg_model}. The model is trained to maximize the likelihood 
+								of producing a target sequence of words optimizing the cross-entropy loss \cite{bishop2006pattern}. 
+								The Encoder takes as input one of the given photos from the user and learns its information using a 
+								Convolutional Neural Network (CNN). The CNN provides the image's learned features to the Decoder which
+								generates the question word by word by using an attention mechanism with a Long Short-Term Memory (LSTM).
+								Since there are already CNNs trained on large datasets with an outstanding performance, 
+								we integrate a \textit{ResNet-101} \cite{he2016deep} trained on ImageNet. 
+
+ Regarding hyperparameters, the VQG encoder is composed of 2048 neuron cells, while the VQG decoder has an attention layer of 512 followed by an embedding layer of 512 and a LSTM with the same size. We set the batch size to 32. We use a dropout of 50\% and a beam search of 7 for decoding, which let as obtain up to 5 output questions. The vocabulary we use consists of all words seen 3 or more times in the training set, which amounts to 11.214 unique tokens. Unknown words are mapped to an $<$\texttt{unk}$>$ token during training, but we do not allow the decoder to produce this token at test time. We also set a maximum sequence length of 6 words as we want simple questions easy to understand and easy to learn by the model.
 							</p>
 						</section>
 					</div>
-					div class="6u">
+					<div class="6u">
 						<section>
 							<h2>Chatbot model</h2>
 							<a class="image fit"><img src="images/seq-to-seq.png" alt="" /></a>
