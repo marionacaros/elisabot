@@ -56,17 +56,27 @@
 						<div class="6u">
 							<h2>Methodology</h2>
 							<section>
-							<p> We propose a conversational agent that simulates a reminiscence therapist by asking questions 
+								<p> Elisabot is a conversational agent that simulates a reminiscence therapist by asking questions 
 								about the patient's experiences. Questions are generated from pictures provided by the patient, 
 								which contain significant moments or important people in user's life. The proposed methodology is 
-								specific for dementia therapy, compared to a general Image-based Question and Answering (Q\&A) 
+								specific for dementia therapy, compared to a general Image-based Question and Answering (Q&A) 
 								system, because the generated questions cannot be answered by only looking at the picture as 
-								common Q\&A systems do, the user needs to know the place, the time, the people or animals appearing 
-								in the picture to be able to answer the questions. To engage the user in the conversation we propose 
-								a second model which generates comments on user's answers. A chatbot model trained with a dataset 
-								containing simple conversations between different people. The activity pretends to be challenging 
+								common Q&A systems do, the user needs to know the place, the time, the people or animals appearing 
+								in the picture to be able to answer the questions. The activity pretends to be challenging 
 								for the patient, as the questions may require the user to exercise the memory, but amusing at the 
-								same time. Our contributions include:
+								same time. 
+								
+								</p>
+								<a class="image fit"><img src="images/diagrama.png" alt="" /></a>
+								<p>
+								 Before starting the conversation, the user must introduce photos containing 
+							significant moments for him/her. The system randomly chooses one of these pictures and analyses 
+							the content. Then, Elisabot shows the selected picture and starts the conversation by asking a 
+							question about the picture. The user should give an answer, even though he does not know it, 
+							and Elisabot makes a relevant comment on it. The cycle starts again by asking another relevant 
+							question about the image and the flow is repeated for 4 to 6 times until the picture is changed. 
+
+<!-- 								Our contributions include:
 
 								- Automation of the Reminiscence therapy by using a multi-modal approach that generates questions 
 								from pictures, without using a reminiscence therapy dataset.
@@ -74,16 +84,8 @@
 								- An end-to-end deep learning approach which do not require hand-crafted rules and it is ready to 
 								be used by mild cognitive impairment patients. The system is designed to be intuitive and easy to 
 								use for the users and could be reached by any smartphone with internet connection.
-								
-								We named it Elisabot and its goal is to maintain a dialog with the patient about user’s 
-							life experiences. Before starting the conversation, the user must introduce photos containing 
-							significant moments for him/her. The system randomly chooses one of these pictures and analyses 
-							the content. Then, Elisabot shows the selected picture and starts the conversation by asking a 
-							question about the picture. The user should give an answer, even though he does not know it, 
-							and Elisabot makes a relevant comment on it. The cycle starts again by asking another relevant 
-							question about the image and the flow is repeated for 4 to 6 times until the picture is changed. 
-							</p>
-							<a class="image fit"><img src="images/diagrama.png" alt="" /></a>
+								 -->
+								</p>
 							</section>
 						</div>
 				
