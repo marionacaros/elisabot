@@ -29,22 +29,10 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 def main():
-    # parser = argparse.ArgumentParser(description='Generate Caption')
-
-    # parser.add_argument('--img', '-i', help='path to image')
-    # parser.add_argument('--model_VQG', '-m', help='path to model_VQG')
-    # parser.add_argument('--word_map', '-wm', help='path to word map JSON')
-    # parser.add_argument('--beam_size', '-b', default=5, type=int, help='beam size for beam search')
-    # parser.add_argument('--dont_smooth', dest='smooth', action='store_false', help='do not smooth alpha overlay')
-
-    # args = parser.parse_args()
 
     word_map = './data/caption_data/WORDMAP_VQG_5_cap_per_img_2_min_word_freq.json'
     model_enc =  'checkpoints/6w_2wf_VQG_model/13epoch/enc_statecheckpoint_VQG_5_cap_per_img_2_min_word_freq.pth.tar'
     model_dec = 'checkpoints/6w_2wf_VQG_model/13epoch/dec_statecheckpoint_VQG_5_cap_per_img_2_min_word_freq.pth.tar'
-
-    # print('Model: ', model_enc)
-    # print(' ')
 
     # Load word map (word2ix)
     with open(word_map, 'r') as j:
@@ -95,40 +83,9 @@ def main():
             [" " + i if not i.startswith("'") and i not in string.punctuation else i for i in q]).strip() + '?'
             detoken_questions.append(string_q)
 
-        # print('Image path: ', img)
-        # print('')
-        # print('------- Generated questions ordered by score -------')
-        # print('')
 
         for q in detoken_questions:
             print(q)
-
-        print('')
-        print('')
-
-        # q0 = [rev_word_map[ind] for ind in all_sequences[0][1:-1]]
-        # q1 = [rev_word_map[ind] for ind in all_sequences[1][1:-1]]
-        # q2 = [rev_word_map[ind] for ind in all_sequences[2][1:-1]]
-        # q3 = [rev_word_map[ind] for ind in all_sequences[3][1:-1]]
-        # q4 = [rev_word_map[ind] for ind in all_sequences[4][1:-1]]
-        # # q5 = [rev_word_map[ind] for ind in all_sequences[5]]
-        # # q6 = [rev_word_map[ind] for ind in all_sequences[6]]
-        #
-        # # Detokenize
-        # qs0 = "".join(
-        #     [" " + i if not i.startswith("'") and i not in string.punctuation else i for i in q0]).strip() + '?'
-        # qs1 = "".join([" " + i if not i.startswith("'") and i not in string.punctuation else i for i in q1]).strip() + '?'
-        # qs2 = "".join([" " + i if not i.startswith("'") and i not in string.punctuation else i for i in q2]).strip() + '?'
-        # qs3 = "".join([" " + i if not i.startswith("'") and i not in string.punctuation else i for i in q3]).strip() + '?'
-        # qs4 = "".join([" " + i if not i.startswith("'") and i not in string.punctuation else i for i in q4]).strip() + '?'
-        #
-        # # Show generated questions
-        # print('------------- All generated questions -------------')
-        # print(qs0)
-        # print(qs1)
-        # print(qs2)
-        # print(qs3)
-        # print(qs4)
 
     # Visualize caption and attention of best sequence
     alphas = torch.FloatTensor(alphas)
@@ -230,8 +187,8 @@ def caption_image_beam_search(encoder, decoder, image_path, word_map, beam_size=
             # print(top_k_words)
 
         # Convert unrolled indices to actual indices of scores
-        prev_word_inds = top_k_words / vocab_size  # (s)
-        next_word_inds = top_k_words % vocab_size  # (s)
+        prev_word_inds = (top_k_words / vocab_size).type(torch.LongTensor)  # (s)
+        next_word_inds = (top_k_words % vocab_size).type(torch.LongTensor)
 
         # Add new words to sequences, alphas
         seqs = torch.cat([seqs[prev_word_inds], next_word_inds.unsqueeze(1)], dim=1)  # (s, step+1)

@@ -1,3 +1,5 @@
+import argparse
+
 from caption import get_question
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import requests
@@ -13,27 +15,21 @@ logging.basicConfig(level=logging.DEBUG,
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
-
-# Telegram token TherapistElisabot
-TOKEN = '810453742:AAHQ9xt3tIbum2NDdMR1_8GmrLjw5RI9cGo'
-
-MY_URL = 'https://api.telegram.org/bot810453742:AAHQ9xt3tIbum2NDdMR1_8GmrLjw5RI9cGo/'
-# https://api.telegram.org/bot810453742:AAHQ9xt3tIbum2NDdMR1_8GmrLjw5RI9cGo/getMe
-
-test_data_file = 'data/filenames_list/patient_02_photo_filenames.txt'
-MY_TEST_FOLDER = 'data/my_test_images/'
-
 idx = 0
 img_path = ''
 shown_img_paths = []
 
 
-def main():
+def main(opts):
 
-    global encoder, decoder, searcher, voc, NEXT_PHOTO
+    global encoder, decoder, searcher, voc, img_directory, TOKEN, test_data_file
+
+    TOKEN = opts.token
+    img_directory = opts.img_dir
+    test_data_file = opts.filenames
 
     # Load chatbot model
-    checkpoint_iter = 12000
+    checkpoint_iter = 13000
     load_model = os.path.join('checkpoints_dialog_model/cornell_model/cornell-movie-dialogs/fine_tunned_cornell', '{}_checkpoint.tar'.format(checkpoint_iter))
     encoder, decoder, searcher, voc = load_chatbot_model(load_model)
 
@@ -69,25 +65,25 @@ def main():
     updater.idle()
 
 
-# def callback(bot, update, error):
-#     update.message.reply_text('The session has finished. It has been a pleasure talking to you! See you soon :) ')
+def callback(update, context, error):
+    update.message.reply_text('The session has finished. It has been a pleasure talking to you! See you soon :) ')
 
 
-def start(bot, update):
+def start(update, context):
     global img_path
     img_path = get_random_pic()
     print(img_path)
     update.message.reply_text("Hello! Let's start the reminiscence therapy!")
-    bot.sendPhoto(chat_id=update.message.chat_id, photo=open(img_path, 'rb'),
+    context.bot.sendPhoto(chat_id=update.message.chat_id, photo=open(img_path, 'rb'),
                   caption="Do you want to talk about this image? Tap /YES or /CHANGE")
 
 
-def exit(bot, update):
+def exit(update, context):
     update.message.reply_text('The session has finished. It has been a pleasure talking to you! See you soon :) ')
 
 
-def pass_q(bot, update):
-    next_question(bot, update)
+def pass_q(update, context):
+    next_question(update, context)
 
 
 def say_hello():
@@ -95,20 +91,20 @@ def say_hello():
     return random.choice(msg)
 
 
-def send_img(bot, update):
+def send_img(update, context):
     global img_path
 
     img_path = get_random_pic()
 
     if img_path == '':
-        exit(bot, update)
+        exit(update, context)
     else:
         # chat_id = bot.get_updates()[-1].message.chat_id
-        bot.sendPhoto(chat_id=update.message.chat_id, photo=open(img_path, 'rb'),
+        context.bot.sendPhoto(chat_id=update.message.chat_id, photo=open(img_path, 'rb'),
                       caption="What about this one? Tap /YES or /CHANGE")
 
 
-def ask_first_question(bot, update, img):
+def ask_first_question(update, context, img):
     global img_path, questions, idx
 
     print("Image selected, generating questions...")
@@ -132,7 +128,7 @@ def time_question():
     return random.choice(q)
 
 
-def feedback_and_question(bot, update):
+def feedback_and_question(update, context):
 
     # Feedback
     print(update.message.text)
@@ -140,20 +136,21 @@ def feedback_and_question(bot, update):
     out = "".join([" " + i if not i.startswith("'") and i not in string.punctuation else i for i in out]).strip()
 
     out = out.split('.', 1)[0]
-    out = out.split('?', 1)[0] + '?'
+    if '?' in out:
+        out = out.split('?', 1)[0] + '?'
 
-    #if out == 'what?':
-    #    out = 'Nice'
+    if out == 'what?':
+       out = 'Nice'
 
-    #if out == 'no':
-    #    out = 'ok'
+    if out == 'no':
+       out = 'ok'
 
     update.message.reply_text(out)
 
-    next_question(bot, update)
+    next_question(update, context)
 
 
-def next_question(bot, update):
+def next_question(update, context):
     global questions, idx
 
     try:
@@ -205,13 +202,17 @@ def get_random_pic():
 
     print('image path ', img_path)
 
-    return MY_TEST_FOLDER + img_path.rstrip()
-
-
-def convert_uppercase(bot, update):
-    update.message.reply_text(update.message.text.upper())
+    return img_directory + img_path.rstrip()
 
 
 if __name__ == '__main__':
 
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--token', type=str, help='Bot token', default='110201543:AAHdqTcvCH1vGWJxfSeofSAs0K5PALDsaw')
+    parser.add_argument('--filenames', type=str, help='text  file with filenames of images',
+                        default='data/filenames_list/my_test_filenames.txt')
+    parser.add_argument('--img_dir', type=str, help='Directory of images', default='data/my_test_images/')
+
+    opts = parser.parse_args()
+
+    main(opts)
