@@ -1,7 +1,6 @@
 import pickle
 import os
 import json
-import urllib
 import pandas as pd
 from pandas import DataFrame
 import requests

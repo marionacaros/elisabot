@@ -17,7 +17,7 @@ Acknowledgments code use: <https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Ima
 """
 
 # Data directories
-data_folder = 'data/caption_data3/'  # folder with data files saved by create_input_files.py
+data_folder = 'data/caption_data/'  # folder with data files saved by create_input_files.py
 data_name = 'VQG_5_cap_per_img_2_min_word_freq'  # base name shared by data files
 directory = './'
 
