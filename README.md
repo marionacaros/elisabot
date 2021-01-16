@@ -17,4 +17,7 @@ Thanks to the experiments, we realise that we obtain the best performance by tra
 5.  Run telegram_bot.py -> python telegram_bot.py --token 110201543:AAHdqTcvCH1vGWJxfSeofSAs0K5PALDsaw 
 6.  To start the Reminiscence Therapy, look for the bot you created in Telegram and write the command /start
     
+## Publications
+For more details you can check our paper here: https://arxiv.org/pdf/1910.11949.pdf, https://dl.acm.org/doi/10.1145/3372278.3391927
+Please, don't forget to cite our work if you find it usefull!
 
