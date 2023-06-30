@@ -33,7 +33,7 @@ scipy==1.1.0
 six==1.15.0
 tensorboardX==2.1
 tifffile==2020.10.1
-torch==1.7.0
+torch==1.13.1
 torchvision==0.8.1
 tornado==6.0.4
 tqdm==4.51.0
