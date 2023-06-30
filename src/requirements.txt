@@ -7,7 +7,7 @@ cryptography==41.0.0
 cycler==0.10.0
 dataclasses==0.6
 decorator==4.4.2
-future==0.18.2
+future==0.18.3
 h5py==2.10.0
 idna==2.10
 imageio==2.9.0
