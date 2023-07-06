@@ -29,7 +29,7 @@ PyWavelets==1.1.1
 regex==2020.10.23
 requests==2.24.0
 scikit-image==0.17.2
-scipy==1.1.0
+scipy==1.10.0
 six==1.15.0
 tensorboardX==2.1
 tifffile==2020.10.1
