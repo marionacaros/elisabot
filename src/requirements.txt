@@ -35,7 +35,7 @@ tensorboardX==2.1
 tifffile==2020.10.1
 torch==1.7.0
 torchvision==0.8.1
-tornado==6.0.4
+tornado==6.3.3
 tqdm==4.51.0
 typing-extensions==3.7.4.3
 tzlocal==2.1
